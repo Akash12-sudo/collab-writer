@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { ReactNode } from "react"
 import { Metadata } from 'next'
 import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
+import { dark, neobrutalism, shadesOfPurple } from '@clerk/themes'
 import Provider from './Provider'
 
 const fontSans = FontSans({
@@ -14,21 +14,13 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: 'LiveDocs',
+  title: 'CollabEditor',
   description: 'Your go-to live collaborative editor',
 }
 
 export default function RootLayout({ children } : { children: React.ReactNode }) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-        variables: { 
-          colorPrimary: '#3371FF',
-          fontSize: '16px'
-        },
-      }}
-    >
+
       <html lang="en" suppressHydrationWarning>
         <head />
         <body
@@ -37,12 +29,22 @@ export default function RootLayout({ children } : { children: React.ReactNode })
             fontSans.variable
           )}
         >
-          <Provider>
-            {children}
-          </Provider>
+          <ClerkProvider
+            appearance={{
+              baseTheme: shadesOfPurple,
+              variables: { 
+                colorPrimary: '#3371FF',
+                fontSize: '16px'
+              },
+            }}
+          >
+            <Provider>
+              {children}
+            </Provider>
+          </ClerkProvider>
         </body>
       </html>
-    </ClerkProvider>
+
     
   )
 }
